@@ -216,7 +216,7 @@ const Home = () => {
                         </div>
                         <div className='flex flex-col gap-10 lg:w-[40%] items-start'>
                             <div className='text-[16px]'>
-                                The modern StudyNotion is the dictates its own terms. Today, to
+                                The modern GoTech is the dictates its own terms. Today, to
                                 be a competitive specialist requires more than professional
                                 skills.
                             </div>
