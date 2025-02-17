@@ -48,11 +48,11 @@ const MyProfile = () => {
                             <p className="text-lg font-semibold text-richblack-5">
                                 {user?.firstName + " " + user?.lastName}
                             </p>
-                            <p className="text-sm text-richblack-300">{user?.email}</p>
+                            <p className="lg:text-sm text-xs text-richblack-300">{user?.email}</p>
                         </div>
                     </div>
 
-                    <div className='translate-x-24 lg:translate-x-0'>
+                    <div className=''>
                         <IconBtn
                             text="Edit"
                             onClick={() => navigate("/dashboard/settings")}
