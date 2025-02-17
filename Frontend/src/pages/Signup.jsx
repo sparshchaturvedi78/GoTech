@@ -7,7 +7,7 @@ const Signup = () => {
     return (
         <div>
             <Template
-                title="Join the millions learning to code with StudyNotion for free"
+                title="Join the millions learning to code with GoTech for free"
                 description1="Build skills for today, tomorrow, and beyond."
                 description2="Education to future-proof your career."
                 image={signupImg}
