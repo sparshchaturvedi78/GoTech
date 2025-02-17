@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 
 const Cart = () => {
   const { total, totalItem } = useSelector((state) => state.cart);
-  console.log('comes to cart');
 
   // Animation variants for the cart courses
   const cartCoursesVariants = {
