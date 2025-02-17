@@ -17,7 +17,6 @@ const ReviewSlider = () => {
   useEffect(() => {
     (async () => {
       const data = await apiConnector("GET", ratingsEndpoints.REVIEWS_DETAILS_API);
-      console.log("reviews api data", data);
       if (data?.data?.success) {
         setReviews(data?.data?.data);
         console.log("reviews state", data?.data?.data);
