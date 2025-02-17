@@ -33,6 +33,8 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      // Add this line to prevent console.log statements
+      'no-console': 'error',  // This will throw an error if console.log is found
     },
   },
 ]
