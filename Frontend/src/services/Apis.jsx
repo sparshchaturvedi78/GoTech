@@ -1,4 +1,4 @@
-const BASE_URL = "https://gotech-1.onrender.com"
+const BASE_URL = "https://gotech-1.onrender.com/"
 
 // AUTH ENDPOINTS
 export const endpoints = {
