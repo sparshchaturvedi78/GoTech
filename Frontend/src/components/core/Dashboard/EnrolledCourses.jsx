@@ -23,7 +23,6 @@ const EnrolledCourses = () => {
         getEnrolledCourses();
     }, []);
 
-    console.log("enroll courses", enrolledCourses)
 
     return (
         <div className="p-4 md:p-8">
