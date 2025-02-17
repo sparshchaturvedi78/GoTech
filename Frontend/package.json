@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "vite",
-    "build": "vite build",
+   "dev": "vite", // For development
+  "build": "vite build", // For production build
+  "start": "vite preview" // For running production build locally
     "lint": "eslint .",
     "preview": "vite preview",
     "server": "cd server && npm run dev",
