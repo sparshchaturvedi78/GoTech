@@ -1,27 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
-import { buyCourse } from '../services/operations/studentFeaturesAPI'
-import { fetchCourseDetails } from '../services/operations/courseDetailsAPI'
-import GetAvgRating from '../utils/avgRating'
-import ConfirmationModal from '../components/common/ConfirmationModal'
-import Footer from '../components/common/Footer'
-import { BiInfoCircle } from "react-icons/bi"
-import { HiOutlineGlobeAlt } from "react-icons/hi"
-import RatingStars from '../components/common/RatingStars'
-import { formatDate } from '../services/formatDate'
-import CourseDetailsCard from '../components/core/Course/CourseDetailsCard'
-import CourseAccordionBar from '../components/core/Course/CourseAccordionBar'
-// import { ReactMarkdown } from "react-markdown/lib/react-markdown"
-import Error from '../pages/Error'
-
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { buyCourse } from '../services/operations/studentFeaturesAPI';
+import { fetchCourseDetails } from '../services/operations/courseDetailsAPI';
+import GetAvgRating from '../utils/avgRating';
+import ConfirmationModal from '../components/common/ConfirmationModal';
+import Footer from '../components/common/Footer';
+import { BiInfoCircle } from 'react-icons/bi';
+import { HiOutlineGlobeAlt } from 'react-icons/hi';
+import RatingStars from '../components/common/RatingStars';
+import { formatDate } from '../services/formatDate';
+import CourseDetailsCard from '../components/core/Course/CourseDetailsCard';
+import CourseAccordionBar from '../components/core/Course/CourseAccordionBar';
+import Error from '../pages/Error';
 
 const CourseDetails = () => {
-
-    const { token } = useSelector((state) => state.auth)
-    const { user } = useSelector((state) => state.profile)
-    const { loading } = useSelector((state) => state.profile)
-    const { paymentLoading } = useSelector((state) => state.course)
+    const { token } = useSelector((state) => state.auth);
+    const { user } = useSelector((state) => state.profile);
+    const { loading } = useSelector((state) => state.profile);
+    const { paymentLoading } = useSelector((state) => state.course);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { courseId } = useParams();
@@ -32,16 +29,13 @@ const CourseDetails = () => {
     const [confirmationModal, setConfirmationModal] = useState(null);
     const [isActive, setIsActive] = useState([]);
 
-
     const handleActive = (id) => {
-        // console.log("called", id)
         setIsActive(
-          !isActive.includes(id)
-            ? isActive.concat([id])
-            : isActive.filter((e) => e != id)
-        )
-      }
-
+            !isActive.includes(id)
+                ? isActive.concat([id])
+                : isActive.filter((e) => e !== id)
+        );
+    };
 
     useEffect(() => {
         const getCourseFullDetails = async () => {
@@ -51,64 +45,59 @@ const CourseDetails = () => {
                     setCourseData(res);
                 }
             } catch (err) {
-                console.log('could not fetch course details')
+                console.log('Could not fetch course details');
             }
-        }
+        };
         getCourseFullDetails();
-    }, [courseId])
+    }, [courseId]);
 
     useEffect(() => {
-        const count = GetAvgRating(courseData?.data?.courseDetail.ratingAndReviews)
+        const count = GetAvgRating(courseData?.data?.courseDetail.ratingAndReviews);
         setAvgReviewCount(count);
-    }, [courseData])
+    }, [courseData]);
 
     useEffect(() => {
         let lectures = 0;
         courseData?.data?.courseDetail?.courseContent?.forEach((sec) => {
-            lectures += sec.subsection.length || 0
-        })
-        setTotalNoOfLectures(lectures)
-    }, [courseData])
+            lectures += sec.subsection.length || 0;
+        });
+        setTotalNoOfLectures(lectures);
+    }, [courseData]);
 
     if (loading || !courseData) {
         return (
             <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
                 <div className="spinner"></div>
             </div>
-        )
+        );
     }
-
 
     const handleBuyCourse = () => {
         if (token) {
-            buyCourse(token, [courseId], user, navigate, dispatch)
-        }
-        else{
+            buyCourse(token, [courseId], user, navigate, dispatch);
+        } else {
             setConfirmationModal({
-                text1: "You are not logged in!!",
-                text2: "Please login to Purchase Course",
-                btn1Text: "Login",
-                btn2Text: "Cancel",
+                text1: 'You are not logged in!!',
+                text2: 'Please login to Purchase Course',
+                btn1Text: 'Login',
+                btn2Text: 'Cancel',
                 bt1Handler: () => navigate('/login'),
                 bt2Handler: () => setConfirmationModal(null),
-            })
+            });
         }
-    }
+    };
 
     if (paymentLoading) {
-        // console.log("payment loading")
         return (
             <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
                 <div className="spinner"></div>
             </div>
-        )
+        );
     }
 
-    if(!courseData.success) {
-        return <Error/>
+    if (!courseData.success) {
+        return <Error />;
     }
-
-
 
     const {
         _id: course_id,
@@ -122,13 +111,13 @@ const CourseDetails = () => {
         instructor,
         studentEnrolled,
         createdAt,
-    } = courseData?.data?.courseDetail
+    } = courseData?.data?.courseDetail;
 
     return (
         <div>
             <div className={`relative w-full bg-richblack-800`}>
                 {/* Hero Section */}
-                <div className="mx-auto box-content px-4 lg:w-[1260px] 2xl:relative ">
+                <div className="mx-auto box-content px-4 lg:w-[1260px] 2xl:relative">
                     <div className="mx-auto grid min-h-[450px] max-w-maxContentTab justify-items-center py-8 lg:mx-0 lg:justify-items-start lg:py-0 xl:max-w-[810px]">
                         <div className="relative block max-h-[30rem] lg:hidden">
                             <div className="absolute bottom-0 left-0 h-full w-full shadow-[#161D29_0px_-64px_36px_-28px_inset]"></div>
@@ -160,18 +149,25 @@ const CourseDetails = () => {
                             </div>
                             <div className="flex flex-wrap gap-5 text-lg">
                                 <p className="flex items-center gap-2">
-                                    {" "}
+                                    {' '}
                                     <BiInfoCircle /> Created at {formatDate(createdAt)}
                                 </p>
                                 <p className="flex items-center gap-2">
-                                    {" "}
+                                    {' '}
                                     <HiOutlineGlobeAlt /> English
                                 </p>
                             </div>
                         </div>
                     </div>
                     {/* Courses Card */}
-                    <div className="right-[1rem] top-[60px] mx-auto hidden min-h-[600px] w-1/3 max-w-[410px] translate-y-24 md:translate-y-0 lg:absolute  lg:block">
+                    <div className="mx-auto block w-full max-w-[410px] py-8 lg:hidden">
+                        <CourseDetailsCard
+                            course={courseData?.data?.courseDetail}
+                            setConfirmationModal={setConfirmationModal}
+                            handleBuyCourse={handleBuyCourse}
+                        />
+                    </div>
+                    <div className="right-[1rem] top-[60px] mx-auto hidden min-h-[600px] w-1/3 max-w-[410px] translate-y-24 md:translate-y-0 lg:absolute lg:block">
                         <CourseDetailsCard
                             course={courseData?.data?.courseDetail}
                             setConfirmationModal={setConfirmationModal}
@@ -191,7 +187,7 @@ const CourseDetails = () => {
                     </div>
 
                     {/* Course Content Section */}
-                    <div className="max-w-[830px] ">
+                    <div className="max-w-[830px]">
                         <div className="flex flex-col gap-3">
                             <p className="text-[28px] font-semibold">Course Content</p>
                             <div className="flex flex-wrap justify-between gap-2">
@@ -252,7 +248,7 @@ const CourseDetails = () => {
             <Footer />
             {confirmationModal && <ConfirmationModal modalData={confirmationModal} />}
         </div>
-    )
-}
+    );
+};
 
-export default CourseDetails
+export default CourseDetails;
