@@ -178,7 +178,7 @@ const Footer = () => {
 
 
           {/* right part */}
-          <div className="text-center">Made with ❤️ Touch © 2023 GoTech</div>
+          <div className="text-center">Made with ❤️ Touch © 2025 GoTech</div>
         </div>
       </div>
     </div>
