@@ -51,7 +51,7 @@ const Catalog = () => {
     }
 
     return (
-        <div className={`relative w-full bg-richblack-900`}>
+        <div className={`relative w-full bg-richblack-900 mt-10`}>
             <div className='mx-auto box-content px-4 lg:w-[1260px] 2xl:relative '>
                 {/* Hero Section */}
                 <div className=" box-content bg-richblack-800 px-4">
