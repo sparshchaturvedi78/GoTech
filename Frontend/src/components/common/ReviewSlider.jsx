@@ -19,7 +19,6 @@ const ReviewSlider = () => {
       const data = await apiConnector("GET", ratingsEndpoints.REVIEWS_DETAILS_API);
       if (data?.data?.success) {
         setReviews(data?.data?.data);
-        console.log("reviews state", data?.data?.data);
       }
     })();
   }, []);
