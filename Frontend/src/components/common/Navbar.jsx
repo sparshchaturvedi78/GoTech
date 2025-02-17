@@ -77,7 +77,6 @@ const Navbar = () => {
     setLoading(true);
     try {
       const res = await apiConnector("GET", categories.CATEGORIES_API);
-      console.log('catergory res', res)
       setSubLinks(res?.data?.data);
     } catch (error) {
       console.log("Could not fetch Categories.", error);
@@ -122,8 +121,9 @@ const Navbar = () => {
               <li key={index}>
                 {link.title === "Catalog" ? (
                   <div
-                    className={`group relative flex cursor-pointer items-center gap-1 ${matchRoute("/catalog/:catalogName") ? "text-yellow-25" : "text-richblack-25"
-                      }`}
+                    className={`group relative flex cursor-pointer items-center gap-1 ${
+                      matchRoute("/catalog/:catalogName") ? "text-yellow-25" : "text-richblack-25"
+                    }`}
                   >
                     <p>{link.title}</p>
                     <BsChevronDown />
@@ -174,14 +174,14 @@ const Navbar = () => {
           )}
           {token === null && (
             <Link to="/login">
-              <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[5px] lg:px-[12px] py-[6px] lg:py-[8px] text-richblack-100 text-sm">
+              <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[6px] lg:px-[12px] py-[4px] lg:py-[8px] text-richblack-100 text-sm">
                 Log in
               </button>
             </Link>
           )}
           {token === null && (
             <Link to="/signup">
-              <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[5px] lg:px-[12px] py-[6px] lg:py-[8px] text-richblack-100 text-sm">
+              <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[6px] lg:px-[12px] py-[4px] lg:py-[8px] text-richblack-100 text-sm">
                 Sign up
               </button>
             </Link>
@@ -190,7 +190,8 @@ const Navbar = () => {
           {token !== null && <ProfileDropdown />}
 
           {/* Mobile Menu Button */}
-          <button className="mr-4 md:hidden z-10 transition-transform duration-300"
+          <button
+            className="mr-4 md:hidden z-10 transition-transform duration-300"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
@@ -204,9 +205,11 @@ const Navbar = () => {
 
       {/* Background Overlay for Blur Effect */}
       {isMobileMenuOpen && (
-        <div className={`fixed inset-0 bg-black bg-opacity-50 backdrop-blur-[1px] z-10 transition-opacity duration-300 ${
-          isMobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}></div>
+        <div
+          className={`fixed inset-0 bg-black bg-opacity-50 backdrop-blur-[1px] z-10 transition-opacity duration-300 ${
+            isMobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+        ></div>
       )}
 
       {/* Mobile Menu */}
@@ -216,18 +219,21 @@ const Navbar = () => {
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <ul className={`flex flex-col gap-5 text-xl p-8 transition-opacity duration-200 ${isMobileMenuOpen ? "opacity-100 delay-200" : "opacity-0"}`}>
+        <ul className={`flex flex-col gap-5 text-xl p-8 transition-opacity duration-200 ${
+          isMobileMenuOpen ? "opacity-100 delay-200" : "opacity-0"
+        }`}>
           {NavbarLinks.map((link, index) => (
             <li key={index}>
               {link.title === "Catalog" ? (
                 <div
-                  className={`group relative flex cursor-pointer items-center gap-1 ${matchRoute("/catalog/:catalogName") ? "text-yellow-25" : "text-richblack-100"
-                    }`}
+                  className={`group relative flex cursor-pointer items-center gap-1 ${
+                    matchRoute("/catalog/:catalogName") ? "text-yellow-25" : "text-richblack-100"
+                  }`}
                 >
                   <p>{link.title}</p>
                   <BsChevronDown />
                   <div className="invisible absolute left-[50%] top-[50%] z-[1000] flex w-[200px] translate-x-[-50%] translate-y-[3em] flex-col rounded-lg bg-richblack-5 p-4 text-richblack-900 opacity-0 transition-all duration-150 group-hover:visible group-hover:translate-y-[1.65em] group-hover:opacity-100 lg:w-[300px]">
-                    <div className="absolute left-[50%] top-0 -z-10 h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-richblack-5"></div>
+                    <div className="absolute left-[50%] top-0 z-10 h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-richblack-5"></div>
                     {loading ? (
                       <p className="text-center">Loading...</p>
                     ) : subLinks && subLinks.length ? (
